@@ -1,0 +1,33 @@
+The `sfGuardUserSwitcherPlugin` is a symfony plugin that provides a way to
+switch the user without login data.
+
+# Installation
+
+  * Install the plugin (via a Subversion checkout)
+  
+        svn co http//svn.symfony-project.com/plugins/sfGuardUserSwitcherPlugin/trunk plugins/sfGuardUserSwitcherPlugin
+
+  * Install the plugin (via a package)
+
+        symfony plugin:install sfGuardUserSwitcherPlugin
+
+  * Enable one or more modules in your `settings.yml` (optional).
+  For your frontend application: sfGuardUserSwitcherPlugin
+
+        all:
+          .settings:
+            enabled_modules:      [default, sfGuardUserSwitcherPlugin]
+
+  * Add component to your layout
+
+        [PHP]
+        include_component('sfGuardUserSwitcher', 'index');
+
+  * Clear you cache
+
+        symfony cc
+
+# Permission
+
+  By default only super admins are allowed to switch the user you change this
+  by override the function `hasPermissionToSwitch` in the component.
