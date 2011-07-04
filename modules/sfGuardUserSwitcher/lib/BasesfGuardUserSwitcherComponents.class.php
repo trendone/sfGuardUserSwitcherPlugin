@@ -62,8 +62,7 @@ class BasesfGuardUserSwitcherComponents extends sfComponents
   {
     $user = $this->getUser();
 
-    return $user->isAuthenticated() AND $user->isSuperAdmin();
-    
+    return $user->isAuthenticated() AND ($user->isSuperAdmin() OR $user->hasAttribute('original_id', 'sfGuardUserSwitcher'));
   }
 
   /**
@@ -75,5 +74,7 @@ class BasesfGuardUserSwitcherComponents extends sfComponents
   {
     $user = $this->getUser();
     $user->setAttribute('user_id', $sfGuardUser->id, 'sfGuardSecurityUser');
+    $user->clearCredentials();
+    $user->addCredentials($sfGuardUser->getAllPermissionNames());
   }
 }
